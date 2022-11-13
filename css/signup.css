@@ -1,0 +1,86 @@
+body {
+    background-color: black;
+}
+.row {
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: rgb(45, 45, 45);
+    color: rgba(255, 0, 0, 0.6);
+}
+
+.card > .tittle {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.card > form > .radio {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.card > form > .radio > .input__radio {
+    display: none;
+}
+
+.card > form > .radio > .input__label {
+    padding: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s;
+
+}
+
+.input__label:not(:last-of-type) {
+    margin-right: 0.5rem;
+}
+
+.input__radio:checked + .input__label {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.6);
+    
+}
+
+.form_content {
+    display: flex;
+    justify-content: center;
+}
+
+.form_content > .left {
+    margin-right: 2rem;
+    min-width: 175px;
+}
+
+.form_content > .right {
+    max-width: 210px;
+}
+.form-control {
+    margin: 0.8rem 0;
+    background-color: rgb(70, 70, 70);
+    border: none;
+}
+
+.form-select {
+    margin: 0.8rem 0;
+    color: rgb(130, 130, 130);
+    background-color: rgb(70, 70, 70);
+    border: none;
+}
+
+.submit {
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.6);
+    margin-bottom: 1.8rem;
+}
