@@ -1,26 +1,28 @@
 <?php
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $db_name = "hms";
-
-    # Create Connection
-    $conn = mysqli_connect($host, $user, $password, $db_name);
-    if (!$conn) {
-        die("Connection Faild.");
-    }
+    require "./php/db_connection.php";
 
     if (isset($_REQUEST["submit"])) {
-        if (($_REQUEST["name"] == "") || ($_REQUEST["age"] == "")) {
-            echo '<div class="alert alert-danger alert-dismissible d-flex align-items-center" role="alert">Fill out all the fields!<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+        if (($_REQUEST["email"] == "") || ($_REQUEST["password"] == "")) {
+            $em = "Fill out all the fields!";
+            $css_class = "alert-danger";
         }
         else {
-            $user_type = $_REQUEST["radio"];
+            $user_type = $_REQUEST["radio"] . "s";
             $useremail = $_REQUEST["email"];
             $password = (int)$_REQUEST["password"];
 
-            // $sql = "INSERT INTO $user_type VALUES ('$useremail', '$password')";
-            // mysqli_query($conn, $sql);
+
+            $sql = "SELECT $password FROM $user_type WHERE email = '$useremail'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
+            $count = mysqli_num_rows($result); 
+            if ($count == 1 && $user_type == "patients") {
+                header("Location: /hms/patient.php");
+            }
+            else {
+                $em = "Account does not exist!";
+                $css_class = "alert-danger";
+            }
         }
         
     }
@@ -46,6 +48,12 @@
         <div class="row">
             <div class="card col-5">
                 <div class="tittle"><?php echo $form_tittle ?></div>
+                <?php
+                    if (!empty($em)) { ?>
+                        <div class="alert <?php echo $css_class ?>">
+                            <?php echo $em ?>
+                        </div>
+                <?php    }?>
                 <form action="" method="post">
                 <div class="radio">
                     <input class="input__radio" type="radio" value="patient" name="radio" id="r1" checked="checked">
@@ -59,6 +67,7 @@
                 <input class="form-control" type="password" placeholder = "Password" aria-label="Password" name="password">
                 <input type="submit" class ="submit" name="submit" value="Submit">
                 </form>
+                <p class="question">Don't have an account? <a href="/hms/patient_signup.php">Signup</a></p>
             </div>
         </div>
     </div>

@@ -1,0 +1,57 @@
+.btn_wrapper {
+    display: flex;
+    justify-content: right;
+  }
+
+.add {
+    margin: 0.5rem 0;
+    width: 5rem;
+    background-color: aquamarine;
+    border-radius: 2px;
+    padding: 4px 0;
+}
+
+.content {
+    position: relative;
+}
+
+
+table {
+    margin-top: 0 !important;
+}
+
+.popup {
+    height: 100%;
+    /* width: 100%; */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 18%;
+}
+
+.window {
+    position: relative;
+    height: 22.5rem;
+    width: 45rem;
+    background-color: rgb(255, 255, 255);
+    top: 5%;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: black;
+    position: absolute;
+    right: 0.5%;
+    top: 2%;
+
+}
+
+.add_form {
+    margin: 2.1rem;
+}
+
+.form-control{
+    margin-bottom: 0.5rem;
+}

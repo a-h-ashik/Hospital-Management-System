@@ -57,12 +57,13 @@ body {
 
 .form_content > .left {
     margin-right: 2rem;
-    min-width: 175px;
+    min-width: 44%;
 }
 
 .form_content > .right {
-    max-width: 210px;
+    max-width: 50%;
 }
+
 .form-control {
     margin: 0.8rem 0;
     background-color: rgb(70, 70, 70);
@@ -82,5 +83,10 @@ body {
     border-radius: 5px;
     color: white;
     background-color: rgba(255, 0, 0, 0.6);
+    margin-bottom: 0.8rem;
+}
+
+.question {
     margin-bottom: 1.8rem;
+    margin-left: 0.15rem;
 }

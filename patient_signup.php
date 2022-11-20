@@ -1,17 +1,8 @@
 <?php
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $db_name = "hms";
-
-    # Create Connection
-    $conn = mysqli_connect($host, $user, $password, $db_name);
-    if (!$conn) {
-        die("Connection Faild.");
-    }
+    require "./php/db_connection.php";
 
     if (isset($_REQUEST["submit"])) {
-        if (($_REQUEST["name"] == "") || ($_REQUEST["email"] == "") || ($_REQUEST["age"] == "") || ($_REQUEST["password1"] == "") || ($_REQUEST["password2"] == "") || ($_REQUEST["address"] == "") || ($_REQUEST["phone"] == "") || ($_REQUEST["bloodgroup"] == "") || ($_REQUEST["gander"] == "")) {
+        if (($_REQUEST["name"] == "") || ($_REQUEST["password1"] == "") || ($_REQUEST["password2"] == "") || ($_REQUEST["address"] == "") || ($_REQUEST["phone"] == "") || ($_REQUEST["gander"] == "")) {
             $em = "Fill out all the fields!";
             $css_class = "alert-danger";
         }
@@ -21,9 +12,7 @@
         }
         else {
             $username = $_REQUEST["name"];
-            $useremail = $_REQUEST["email"];
             $password = $_REQUEST["password1"];
-            $age = (int)$_REQUEST["age"];
             $address = $_REQUEST["address"];
             $phone = (int)$_REQUEST["phone"];
             $bloodgroup = $_REQUEST["bloodgroup"];
@@ -33,11 +22,23 @@
             $temp_path = $_FILES["profile_image"]["tmp_name"];
             $target = 'images/' . $img_name;
             if (move_uploaded_file($temp_path, $target)) {
-                $id = uniqid('P');
-                $sql = "INSERT INTO patient VALUES ('$id', '$username', '$useremail', '$age', '$address', '$phone', '$bloodgroup', '$gander', '$img_name', '$password')";
+                $sql = "SELECT patient_id FROM patients ORDER BY patient_id DESC LIMIT 1";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $id = (int)$row["patient_id"];
+                    $id = $id + 1;
+                }
+                else {
+                    $id = "20220000";
+                }
+
+
+                $sql = "INSERT INTO patients VALUES ($id, '$username', '$address', '$phone', '$bloodgroup', '$gander', '$password', '$img_name')";
                 if (mysqli_query($conn, $sql)) {
                     $em = "Account is created successfully.";
                     $css_class = "alert-success";
+                    header("Location: /hms/login.php");
                 }
                 else {
                     $em = "Sorry! An error occured!";
@@ -55,7 +56,7 @@
     
 
 
-    $form_tittle = "Patient Sign UP"
+    $form_tittle = "Patient Sign Up"
 ?>
 
 <!DOCTYPE html>
@@ -84,15 +85,13 @@
                 <div class="form_content">
                     <div class="left">
                     <input class="form-control" type="text" placeholder = "Name" aria-label="Name" name="name">
-                    <input class="form-control" type="text" placeholder = "Email" aria-label="Email" name="email">
-                    <input class="form-control" type="text" placeholder = "Age" aria-label="Age" name="age">
+                    <input class="form-control" type="text" placeholder = "Phone" aria-label="Phone" name="phone">
                     <input class="form-control" type="password" placeholder = "Password" aria-label="Password" name="password1">
                     <input class="form-control" type="password" placeholder = "Re-enter Password" aria-label="Password" name="password2">
                     </div>
                 
                     <div class="right">
                     <input class="form-control" type="text" placeholder = "Address" aria-label="Address" name="address">
-                    <input class="form-control" type="text" placeholder = "Phone" aria-label="Phone" name="phone">
                     <select class="form-select" name="bloodgroup" aria-label="Default select example">
                         <option selected>Blood Group...</option>
                         <option value="A+">A+</option>
@@ -114,6 +113,7 @@
                 </div>    
                 <input type="submit" class ="submit" name="submit" value="Submit">
                 </form>
+                <p class="question">Aready have an account? <a href="/hms/login.php">Login</a></p>
             </div>
         </div>
     </div>
