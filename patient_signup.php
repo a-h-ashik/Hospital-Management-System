@@ -2,7 +2,7 @@
     require "./php/db_connection.php";
 
     if (isset($_REQUEST["submit"])) {
-        if (($_REQUEST["name"] == "") || ($_REQUEST["password1"] == "") || ($_REQUEST["password2"] == "") || ($_REQUEST["address"] == "") || ($_REQUEST["phone"] == "") || ($_REQUEST["gander"] == "")) {
+        if (($_REQUEST["name"] == "") || ($_REQUEST["password1"] == "") || ($_REQUEST["password2"] == "") || ($_REQUEST["address"] == "") || ($_REQUEST["email"] == "") || ($_REQUEST["gander"] == "")) {
             $em = "Fill out all the fields!";
             $css_class = "alert-danger";
         }
@@ -14,19 +14,20 @@
             $username = $_REQUEST["name"];
             $password = $_REQUEST["password1"];
             $address = $_REQUEST["address"];
-            $phone = (int)$_REQUEST["phone"];
-            $bloodgroup = $_REQUEST["bloodgroup"];
+            $email = $_REQUEST["email"];
             $gander = $_REQUEST["gander"];
-
-            $img_name = 'IMG_' . $username . '_' . $_FILES["profile_image"]["name"];
+            $arr = explode('/', $_FILES['profile_image']['type']);
+            $ext = $arr[1];
+            $img_name = $username . '.' . $ext;
+            print_r($img_name);
             $temp_path = $_FILES["profile_image"]["tmp_name"];
             $target = 'images/' . $img_name;
             if (move_uploaded_file($temp_path, $target)) {
-                $sql = "SELECT patient_id FROM patients ORDER BY patient_id DESC LIMIT 1";
+                $sql = "SELECT pat_id FROM patients ORDER BY pat_id DESC LIMIT 1";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    $id = (int)$row["patient_id"];
+                    $id = (int)$row["pat_id"];
                     $id = $id + 1;
                 }
                 else {
@@ -34,7 +35,7 @@
                 }
 
 
-                $sql = "INSERT INTO patients VALUES ($id, '$username', '$address', '$phone', '$bloodgroup', '$gander', '$password', '$img_name')";
+                $sql = "INSERT INTO patients VALUES ($id, '$username', '$email', '$gander', '$address', '$img_name', '$password')";
                 if (mysqli_query($conn, $sql)) {
                     $em = "Account is created successfully.";
                     $css_class = "alert-success";
@@ -44,6 +45,7 @@
                     $em = "Sorry! An error occured!";
                     $css_class = "alert-danger";
                 }
+                
                 
             }
             else {
@@ -85,14 +87,14 @@
                 <div class="form_content">
                     <div class="left">
                     <input class="form-control" type="text" placeholder = "Name" aria-label="Name" name="name">
-                    <input class="form-control" type="text" placeholder = "Phone" aria-label="Phone" name="phone">
+                    <input class="form-control" type="text" placeholder = "Email" aria-label="Email" name="email">
                     <input class="form-control" type="password" placeholder = "Password" aria-label="Password" name="password1">
                     <input class="form-control" type="password" placeholder = "Re-enter Password" aria-label="Password" name="password2">
                     </div>
                 
                     <div class="right">
                     <input class="form-control" type="text" placeholder = "Address" aria-label="Address" name="address">
-                    <select class="form-select" name="bloodgroup" aria-label="Default select example">
+                    <!-- <select class="form-select" name="bloodgroup" aria-label="Default select example">
                         <option selected>Blood Group...</option>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
@@ -102,7 +104,7 @@
                         <option value="O-">O-</option>
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
-                    </select>
+                    </select> -->
                     <select class="form-select" name="gander" aria-label="Default select example">
                         <option selected>Gander...</option>
                         <option value="Male">Male</option>

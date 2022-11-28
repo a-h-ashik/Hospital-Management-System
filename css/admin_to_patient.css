@@ -9,16 +9,17 @@
 }
 
 /* Header */
-.header {
+.top-bar {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 1rem;
-    border-radius: 0 0 5px 5px;
+    margin-top: 1rem;
+    border-radius: 5px;
     background-color: slateblue;
 }
 
-.header_text{
+.top-bar-text{
     color: white;
     font-size: 1.5rem;
     font-weight: bold;
@@ -43,7 +44,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .button_delete {

@@ -1,13 +1,14 @@
 <?php
     require "./php/db_connection.php";
+    require "./php/session.php";
 
     # Showing All Staffs
-    $sql = "SELECT * FROM staffs";
-    $staff = mysqli_query($conn, $sql);
+    // $sql = "SELECT * FROM staffs";
+    // $staff = mysqli_query($conn, $sql);
 
     # Showing Complaints
-    $sql = "SELECT * FROM complaints";
-    $complaint = mysqli_query($conn, $sql);
+    // $sql = "SELECT * FROM complaints";
+    // $complaint = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -46,8 +47,8 @@
                     </div>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="./php/logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="./php/logout.php">Action</a></li>
                     </ul>
                 </div>
                 
@@ -61,91 +62,19 @@
                     <p class="text">Dashbord Overview</p>
             </div>
             <div class="body-content">
-            
-        
+                <!-- Write code here -->
+                
+
+
+
+
+
+
+
             </div>
         </div>
 
     </div>
-                
-                    <!--
-                    
-                        <div class="row">
-                            <div class="card col-2">
-                                <div class="info">
-                                    <div class="card_name">Patient</div>
-                                    <div class="number">1000</div>
-                                </div>
-                                <div class="icon">
-                                    <img src="./icons/patient.png">
-                                </div>
-                            </div>
-                            <div class="card col-2 offset-1">
-                                <div class="info">
-                                    <div class="card_name">Doctor</div>
-                                    <div class="number">1000</div>
-                                </div>
-                                <div class="icon">
-                                    <img src="./icons/doctor.png">
-                                </div>
-                            </div>
-                            <div class="card col-2 offset-1">
-                                <div class="info">
-                                    <div class="card_name">Lab Tech</div>
-                                    <div class="number">1000</div>
-                                </div>
-                                <div class="icon">
-                                    <img src="./icons/lab_tech.png">
-                                </div>
-                            </div>
-                            <div class="card col-2 offset-1">
-                                <div class="info">
-                                    <div class="card_name">Nurse</div>
-                                    <div class="number">1000</div>
-                                </div>
-                                <div class="icon">
-                                    <img src="./icons/nurse.png">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row-2">
-                            <div class="table_outer">
-                                <div class="table_label">Staff Panel</div>
-                                <div class="table_wrapper">
-                                    <table class="table table-hover ">
-                                        <thead>
-                                            <tr>
-                                            <th class="colum" scope="col">ID</th>
-                                            <th class="colum" scope="col">NAME</th>
-                                            <th class="colum" scope="col">EMAIL</th>
-                                            <th class="colum" scope="col">NUMBER</th>
-                                            </tr>
-                                            
-                                        </thead>
-                                        <tbody>
-                                            <?php while ($row = mysqli_fetch_array($staff, MYSQLI_ASSOC)) { ?>
-                                            <tr>
-                                            <th scope="row"><?php echo $row["staff_id"] ?></th>
-                                            <td><?php echo $row["name"] ?></td>
-                                            <td><?php echo $row["email"] ?></td>
-                                            <td><?php echo $row["phone"] ?></td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
-                            </div>
-                            <div class="complaints">
-                                <div class="comp_label">Complaints</div>
-                                <?php while ($row = mysqli_fetch_array($complaint, MYSQLI_ASSOC)) { ?>
-                                <a href="#"><div class="complain"><?php echo $row["tittle"] ?></div></a>
-                                <?php } ?>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

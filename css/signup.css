@@ -1,17 +1,13 @@
-body {
-    background-color: black;
-}
 .row {
     min-height: 100vh;
-    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card {
-    background-color: rgb(45, 45, 45);
-    color: rgba(255, 0, 0, 0.6);
+    background-color: white;
+    color: #00a558;
 }
 
 .card > .tittle {
@@ -44,11 +40,11 @@ body {
     margin-right: 0.5rem;
 }
 
-.input__radio:checked + .input__label {
+/* .input__radio:checked + .input__label {
     color: white;
     background-color: rgba(255, 0, 0, 0.6);
     
-}
+} */
 
 .form_content {
     display: flex;
@@ -66,15 +62,17 @@ body {
 
 .form-control {
     margin: 0.8rem 0;
-    background-color: rgb(70, 70, 70);
     border: none;
+    border-bottom: 0.5px solid black;
+    border-radius: 0;
 }
 
 .form-select {
     margin: 0.8rem 0;
     color: rgb(130, 130, 130);
-    background-color: rgb(70, 70, 70);
     border: none;
+    border-bottom: 0.5px solid black;
+    border-radius: 0;
 }
 
 .submit {
@@ -82,11 +80,18 @@ body {
     border: 0;
     border-radius: 5px;
     color: white;
-    background-color: rgba(255, 0, 0, 0.6);
+    background-color: #00a558;
     margin-bottom: 0.8rem;
 }
 
 .question {
     margin-bottom: 1.8rem;
     margin-left: 0.15rem;
+}
+
+
+@media (max-width: 770px) {
+    .card {
+        width: 100%;
+    }
 }

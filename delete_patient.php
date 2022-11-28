@@ -3,10 +3,10 @@
 
     if (isset($_GET["user_id"])) {
         $user_id = $_GET["user_id"];
-        $sql =  "SELECT name FROM patients WHERE name IN (SELECT name FROM patients WHERE patient_id = '$user_id')";
+        $sql =  "SELECT pat_name FROM patients WHERE pat_name IN (SELECT pat_name FROM patients WHERE pat_id = '$user_id')";
         $result_name = mysqli_query($conn, $sql);
 
-        $sql = "DELETE FROM patients WHERE patient_id = '$user_id'";
+        $sql = "DELETE FROM patients WHERE pat_id = '$user_id'";
         $result = mysqli_query($conn, $sql);
         
         if ($result) {

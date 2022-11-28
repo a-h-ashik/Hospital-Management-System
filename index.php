@@ -1,3 +1,16 @@
+<?php
+    require "./php/db_connection.php";
+    // require "./php/session.php";
+
+    session_start();
+    if (isset($_SESSION['user_id'])) {
+        $session_set = TRUE;
+    }
+    else {
+        $session_set = FALSE;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +23,26 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
+    <!-- Font Awsome Kit -->
+    <script src="https://kit.fontawesome.com/a481ba0e3b.js" crossorigin="anonymous"></script>
+
+
     <div class="nav">
         <div class="nav_bar">
             <div class="logo">HMS</div>
             <div class="pages">
-                <a href="#"><div class="page first">Home</div></a>
-                <a href="#"><div class="page">Departments</div></a>
-                <a href="#"><div class="page">Find A Doctor</div></a>
-                <a href="#"><div class="page">Login</div></a>
+                <a href="index.php"><div class="page first">Home</div></a>
+                <!-- <a href="#"><div class="page">Departments</div></a> -->
+                <a href="find-a-doctor.php"><div class="page">Find A Doctor</div></a>
 
+                <?php if (!$session_set) { ?>
+                <a href="login.php"><div class="page">Login</div></a>
+                <?php } ?>
+
+                <?php if ($session_set) { ?>
                 <a href="#"><div class="page">Profile</div></a>
-                <a href="#"><div class="page">Logout</div></a>
+                <a href="./php/logout.php"><div class="page">Logout</div></a> 
+                <?php } ?>
             </div>
         </div>
     </div>    
@@ -76,13 +98,107 @@
                 <div class="card-logo">
                 <span class="material-symbols-outlined">medical_services</span>
                 </div>
-                <div class="card-tittle">24/7 Service</div>
+                <div class="card-tittle">Treatment</div>
                 <div class="card-text">We serve 24 hours a day</div>
             </div>
-            <div class="card-mod"></div>
-            <div class="card-mod"></div>
+            <div class="card-mod">
+                <div class="card-logo">
+                <span class="material-symbols-outlined">vaccines</span>
+                </div>
+                <div class="card-tittle">Pharmacy</div>
+                <div class="card-text">We have 24 hours pharmacy support</div>
+            </div>
+            <div class="card-mod">
+                <div class="card-logo">
+                <span class="material-symbols-outlined">science</span>
+                </div>
+                <div class="card-tittle">LAB Facilities</div>
+                <div class="card-text">We have every kind of modern equipments</div>
+            </div>
+            <div class="card-mod">
+                <div class="card-logo">
+                <span class="material-symbols-outlined">e911_emergency</span>
+                </div>
+                <div class="card-tittle">Emergency Care</div>
+                <div class="card-text">We give emergency care 7 days a week</div>
+            </div>
+            <div class="card-mod">
+                <div class="card-logo">
+                <span class="material-symbols-outlined">bloodtype</span>
+                </div>
+                <div class="card-tittle">Blood Bank</div>
+                <div class="card-text">We have our own blood bank</div>
+            </div>
+            <div class="card-mod">
+                <div class="card-logo">
+                <span class="material-symbols-outlined">loupe</span>
+                </div>
+                <div class="card-tittle">Operation Theater</div>
+                <div class="card-text">Well-equipped OT to address all emergencies Conducting successful operations</div>
+            </div>
         </div>
     </div>
+
+
+    <div class="news-section">
+        <div class="news-section-left">
+            <div class="news-media-tittle">
+                <span>News</span>
+                <span class="colored">& Media</span>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="./images/test.jpg">
+                </div>
+                <div class="news-content">
+                    <a href="#"><div class="news-tittle">This is tittle</div></a>
+                    <div class="news-date">21 Nov, 2022</div>
+                </div>
+            </div>
+        </div>
+        <div class="news-section-right">
+            <div class="news-media-tittle">
+                <span>Happy</span>
+                <span class="colored">Patients</span>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="./images/test.jpg">
+                </div>
+                <div class="news-content">
+                    <a href="#"><div class="news-tittle">This is tittle</div></a>
+                    <div class="news-date">21 Nov, 2022</div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="footer">
+        <div class="foot-logo">
+            <div class="logo">
+
+            </div>
+        </div>
+        <div class="contact-navigation">
+            <div class="navigation-links">
+                <div><a href="#" class="n-link">About Us</a></div>
+                <div><a href="#" class="n-link">Departments</a></div>
+                <div><a href="#" class="n-link">Appoinments</a></div>
+            </div>
+            <div class="contact-info"><span class="bold">Address:</span> Dhaka, Bangladesh.</div>
+            <div class="contact-info"><span class="bold">Contact:</span> hospital@gmail.com</div>
+        </div>
+        <div class="social-links">
+            <a href="#" class="s-links"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="s-links"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="s-links"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+         
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

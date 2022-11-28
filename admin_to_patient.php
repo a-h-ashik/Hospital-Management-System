@@ -1,5 +1,7 @@
-<!-- <?php
+<?php
     require "../hms/php/db_connection.php";
+    require "./php/session.php";
+
 
     if (isset($_GET["em"]) && isset($_GET["css_class"])) {
         $em = $_GET["em"];
@@ -16,7 +18,7 @@
     }
     
 
-?> -->
+?>
 
 
 
@@ -47,50 +49,68 @@
         </div>
 
             <div class="content">
-                    <div class="header">
-                        <div class="header_text">Patients</div>
-                        <div class="search_bar">
-                            <form action="" method="post">
-                                <input type="search" name="search_val">
-                                <input class="button" type="submit" value="Search" name="search">
-                            </form>
+                <div class="header">
+
+                    <!-- Dropdown -->
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user">
+                            <div class="name">Administrator</div>
+                            <div class="avater"><img src="./images/administrator.svg"></div>
                         </div>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="./php/logout.php">Logout</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                        </ul>
                     </div>
 
-                    <table>
-                        <thead>
-                            <tr id="header">
-                            <th scope="col">ID</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">ADDRESS</th>
-                            <th scope="col">PHONE</th>
-                            <th scope="col">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($row = mysqli_fetch_array($patient, MYSQLI_ASSOC)) { 
-                                $id = $row["patient_id"];
-                            ?>
-                            <tr>
-                            <td><?php echo $row["patient_id"] ?></td>
-                            <td><?php echo $row["name"] ?></td>
-                            <td><?php echo $row["address"] ?></td>
-                            <td><?php echo $row["phone"] ?></td>
-                            <td class="action">
-                            <!-- <a href=""><button class="button_update" name="update"><span class="material-symbols-outlined">edit</span></button></a> -->
-                            <a href="delete_patient.php?user_id=<?php echo $id ?>" ><button class="button_delete" name="delete"><span class="material-symbols-outlined">delete_forever</span></button></a>                       
-                            </td>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                </div>
 
-                    <?php
-                        if (!empty($em)) { ?>
-                                <div class="alert <?php echo $css_class ?>">
-                                    <?php echo $em ?>
-                                </div>
-                        <?php    }?>
+                <div class="top-bar">
+                    <div class="top-bar-text">Patients</div>
+                    <div class="search_bar">
+                        <form action="" method="post">
+                            <input type="search" name="search_val">
+                            <input class="button" type="submit" value="Search" name="search">
+                        </form>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr id="header">
+                        <th scope="col">ID</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">ADDRESS</th>
+                        <th scope="col">PHONE</th>
+                        <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = mysqli_fetch_array($patient, MYSQLI_ASSOC)) { 
+                            $id = $row["pat_id"];
+                        ?>
+                        <tr>
+                        <td><?php echo $row["pat_id"] ?></td>
+                        <td><?php echo $row["pat_name"] ?></td>
+                        <td><?php echo $row["address"] ?></td>
+                        <td><?php echo $row["pat_email"] ?></td>
+                        <td class="action">
+                        <!-- <a href=""><button class="button_update" name="update"><span class="material-symbols-outlined">edit</span></button></a> -->
+                        <a href="delete_patient.php?user_id=<?php echo $id ?>" ><button class="button_delete" name="delete"><span class="material-symbols-outlined">delete_forever</span></button></a>                       
+                        </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+
+                <?php
+                    if (!empty($em)) { ?>
+                            <div class="alert <?php echo $css_class ?>">
+                                <?php echo $em ?>
+                            </div>
+                    <?php    }?>
             </div>
     </div>
 

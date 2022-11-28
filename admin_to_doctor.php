@@ -1,5 +1,7 @@
-<!-- <?php
+<?php
     require "../hms/php/db_connection.php";
+    require "./php/session.php";
+
     
     #Getting for Messages
     if (isset($_GET["em"]) && isset($_GET["css_class"])) {
@@ -30,26 +32,31 @@
         }
         else {
             #Setting doctor_id
-            $sql = "SELECT doctor_id FROM doctors ORDER BY doctor_id DESC LIMIT 1";
+            $sql = "SELECT doc_id FROM doctors ORDER BY doc_id DESC LIMIT 1";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    $id = (int)$row["doctor_id"];
+                    $id = (int)$row["doc_id"];
                     $id = $id + 1;
                 }
                 else {
-                    $id = "100";
+                    $id = "1100";
                 }
             
             #Getting Values from FORM
+            session_start();
             $name = $_REQUEST["name"];
             $email = $_REQUEST["email"];
             $speciality = $_REQUEST["speciality"];
             $degree = $_REQUEST["degree"];
+            $visit = $_REQUEST["visit"];
+            $department = $_REQUEST["department"];
+            $image = 'doc_default.png';
+            $admin_id = $_SESSION['user_id'];
             $password1 = $_REQUEST["password1"];
             
             #Insert Query
-            $sql = "INSERT INTO doctors VALUES ($id, '$name', '$email', '$speciality', '$degree', '$password1')";
+            $sql = "INSERT INTO doctors VALUES ($id, '$name', '$email', '$degree', '$speciality', '$visit', '$department', '$image', '$password1', '$admin_id')";
             $result = mysqli_query($conn, $sql);
 
             #Sending Messages
@@ -65,7 +72,7 @@
         }
     }
 
-?> -->
+?>
 
 
 
@@ -99,7 +106,26 @@
 
         <div class="content">
             <div class="header">
-                <div class="header_text">Doctors</div>
+
+                <!-- Dropdown -->
+                <div class="dropdown">
+                    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="user">
+                        <div class="name">Administrator</div>
+                        <div class="avater"><img src="./images/administrator.svg"></div>
+                    </div>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="./php/logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <div class="top-bar">
+                <div class="top-bar-text">Doctors</div>
                 <div class="search_bar">
                     <form action="" method="post">
                         <input type="search" name="search_val">
@@ -124,12 +150,12 @@
                 </thead>
                 <tbody>
                     <?php while ($row = mysqli_fetch_array($doctor, MYSQLI_ASSOC)) {
-                        $id = $row["doctor_id"];
+                        $id = $row["doc_id"];
                     ?>
                     <tr>
-                    <td><?php echo $row["doctor_id"] ?></td>
-                    <td><?php echo $row["name"] ?></td>
-                    <td><?php echo $row["email"] ?></td>
+                    <td><?php echo $row["doc_id"] ?></td>
+                    <td><?php echo $row["doc_name"] ?></td>
+                    <td><?php echo $row["doc_email"] ?></td>
                     <td><?php echo $row["degree"] ?></td>
                     <td class="action">
                     <button class="button_update" name="update"><span class="material-symbols-outlined">edit</span></button>
@@ -156,6 +182,8 @@
                     <input class="form-control" type="text" placeholder = "Email" aria-label="Email" name="email">
                     <input class="form-control" type="text" placeholder = "Speciality" aria-label="Speciality" name="speciality">
                     <input class="form-control" type="text" placeholder = "Degree" aria-label="Degree" name="degree">
+                    <input class="form-control" type="text" placeholder = "Department" aria-label="Department" name="department">
+                    <input class="form-control" type="text" placeholder = "Visit" aria-label="Visit" name="visit">
                     <input class="form-control" type="password" placeholder = "Password" aria-label="Password1" name="password1">
                     <input class="form-control" type="password" placeholder = "Re-enter Password" aria-label="Password2" name="password2">
                     <input type="submit" class ="submit" name="submit" value="Submit">
