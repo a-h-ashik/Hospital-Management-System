@@ -1,29 +1,12 @@
-.btn_wrapper {
-    display: flex;
-    justify-content: right;
-  }
-
-.add {
-    margin: 0.5rem 0;
-    width: 5rem;
-    background-color: aquamarine;
-    border-radius: 2px;
-    padding: 4px 0;
-}
-
 .content {
     position: relative;
 }
 
 
-table {
-    margin-top: 0 !important;
-}
-
 .popup {
     height: 100%;
     width: 100%;
-    display: none;
+    /* display: none; */
     align-items: center;
     justify-content: center;
     position: absolute;
@@ -37,14 +20,6 @@ table {
     width: 100%;
     padding: 2.5rem 10rem;
     background-color: rgb(255, 255, 255);
-}
-
-.close {
-    color: black;
-    position: absolute;
-    right: 0.5%;
-    top: 2%;
-
 }
 
 .form-control{

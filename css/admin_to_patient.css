@@ -40,12 +40,12 @@ button {
     border: none;
 }
 
-.action {
+/* .action {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-}
+} */
 
 .button_delete {
     color: red;
@@ -81,8 +81,8 @@ tr {
 th,
 td {
     padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    text-align: justify;
+    /* border-bottom: 1px solid #ddd; */
 }
 
 #header {

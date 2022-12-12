@@ -1,5 +1,6 @@
 <?php
-    require "./php/db_connection.php";
+    require "./utility/db_connection.php";
+    
 
     # Getting Messages
     if (isset($_REQUEST["msg"])) {
@@ -35,24 +36,26 @@
             }
 
 
-            $sql = "SELECT $password FROM $usertable WHERE EXISTS (SELECT * FROM $usertable WHERE $email = '$useremail')";
+            $sql = "SELECT $password FROM $usertable WHERE $email = '$useremail' AND EXISTS (SELECT * FROM $usertable WHERE $email = '$useremail')";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
             $count = mysqli_num_rows($result); 
 
             #Setting Session
-            session_start();
+            
             $sql = "SELECT * FROM $usertable WHERE $email = '$useremail'";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            
+            session_start();
             $_SESSION["user_id"] = $row["$userid"];
             $_SESSION["user_table"] = $usertable;
 
             if ($count == 1 && $usertable == "patients") {
-                header("Location: /hms/");
+                header("Location: ./index.php");
             }
             else if ($count == 1 && $usertable == "admins") {
-                header("Location: /hms/admin.php");
+                header("Location:./admin/admin.php");
             }
             else {
                 $em = "Account does not exist!";

@@ -1,7 +1,5 @@
 <?php
-    require "../hms/php/db_connection.php";
-    require "./php/session.php";
-
+    include '../utility/admin_template.php';
 
     if (isset($_GET["em"]) && isset($_GET["css_class"])) {
         $em = $_GET["em"];
@@ -13,7 +11,7 @@
     }
     else {
         $value = $_REQUEST["search_val"];
-        $sql = "SELECT * FROM patients WHERE name LIKE '%$value%'";
+        $sql = "SELECT * FROM patients WHERE pat_name LIKE '%$value%'";
         $patient = mysqli_query($conn, $sql);
     }
     
@@ -22,50 +20,11 @@
 
 
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patients || HMS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Patient-Admin || HMS</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="./css/admin.css">
-    <link rel="stylesheet" href="./css/admin_to_patient.css">
+    <link rel="stylesheet" href="../css/admin_to_patient.css">
 </head>
-<body>
-    <!-- <a href="admin.php"><button class="back">Dashbord</button></a>-->
-    <div class="container-mod">
-        <div class="sidebar">
-                <div class="bar_tittle">ADMIN - HMS</div>
-                <div class="bar_menu">
-                    <a class="a" href="admin.php"><p class="item">Dashbord</p></a>
-                    <a href="admin_to_patient.php"><p class="item">Patient</p></a>
-                    <a href="admin_to_doctor.php"><p class="item">Doctor</p></a>
-                    <a href="#"><p class="item">Item 3</p></a>
-                    <a href="#"><p class="item">Item 4</p></a>
-                </div>
-        </div>
-
-            <div class="content">
-                <div class="header">
-
-                    <!-- Dropdown -->
-                    <div class="dropdown">
-                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="user">
-                            <div class="name">Administrator</div>
-                            <div class="avater"><img src="./images/administrator.svg"></div>
-                        </div>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="./php/logout.php">Logout</a></li>
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                        </ul>
-                    </div>
-
-                </div>
 
                 <div class="top-bar">
                     <div class="top-bar-text">Patients</div>
@@ -98,7 +57,7 @@
                         <td><?php echo $row["pat_email"] ?></td>
                         <td class="action">
                         <!-- <a href=""><button class="button_update" name="update"><span class="material-symbols-outlined">edit</span></button></a> -->
-                        <a href="delete_patient.php?user_id=<?php echo $id ?>" ><button class="button_delete" name="delete"><span class="material-symbols-outlined">delete_forever</span></button></a>                       
+                        <a href="./action/delete_patient.php?user_id=<?php echo $id ?>" ><button class="button_delete" name="delete"><span class="material-symbols-outlined">delete_forever</span></button></a>                       
                         </td>
                         </tr>
                         <?php } ?>
@@ -107,8 +66,9 @@
 
                 <?php
                     if (!empty($em)) { ?>
-                            <div class="alert <?php echo $css_class ?>">
+                            <div class="alert <?php echo $css_class ?> alert-dismissible fade show">
                                 <?php echo $em ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                     <?php    }?>
             </div>

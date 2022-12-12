@@ -1,6 +1,5 @@
 <?php
-    require "./php/db_connection.php";
-    // require "./php/session.php";
+    require "./utility/db_connection.php";
 
     session_start();
     if (isset($_SESSION['user_id'])) {
@@ -146,16 +145,29 @@
                 <span>News</span>
                 <span class="colored">& Media</span>
             </div>
+            <?php 
+            $sql = "SELECT * FROM news ORDER BY new_date DESC LIMIT 3";
+            $result = mysqli_query($conn, $sql);
+            while ($news = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            ?>
 
             <div class="news-card">
                 <div class="news-image">
-                    <img src="./images/test.jpg">
+                    <img src="./images/<?php echo $news['new_image'] ?>">
                 </div>
                 <div class="news-content">
-                    <a href="#"><div class="news-tittle">This is tittle</div></a>
-                    <div class="news-date">21 Nov, 2022</div>
+                    <a href="news & media.php?new_name=<?php echo $news['new_name'] ?>"><div class="news-tittle">
+                    <?php echo $news['new_name']; ?>
+                    </div></a>
+                    <div class="news-date">
+                    <?php 
+                        $date = date_create($news['new_date']);
+                        echo date_format($date, 'M d, Y');
+                    ?>
+                    </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
         <div class="news-section-right">
             <div class="news-media-tittle">
@@ -163,15 +175,29 @@
                 <span class="colored">Patients</span>
             </div>
 
+            <?php 
+            $sql = "SELECT * FROM stories ORDER BY sto_date DESC LIMIT 3";
+            $result = mysqli_query($conn, $sql);
+            while ($story = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            ?>
+
             <div class="news-card">
                 <div class="news-image">
-                    <img src="./images/test.jpg">
+                    <img src="./images/<?php echo $story['sto_image'] ?>">
                 </div>
                 <div class="news-content">
-                    <a href="#"><div class="news-tittle">This is tittle</div></a>
-                    <div class="news-date">21 Nov, 2022</div>
+                    <a href="happy_patient.php?sto_name=<?php echo $story['sto_name'] ?>"><div class="news-tittle">
+                        <?php echo $story['sto_name']; ?></div></a>
+                    <div class="news-date">
+                        <?php 
+                        $date = date_create($story['sto_date']);
+                        echo date_format($date, 'M d, Y');
+                        ?>
+                    </div>
                 </div>
             </div>
+
+            <?php } ?>
         </div>
     
     </div>

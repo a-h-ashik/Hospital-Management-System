@@ -1,5 +1,5 @@
 <?php
-    require "./php/db_connection.php";
+    require "./utility/db_connection.php";
 
     if (isset($_REQUEST["submit"])) {
         if (($_REQUEST["name"] == "") || ($_REQUEST["password1"] == "") || ($_REQUEST["password2"] == "") || ($_REQUEST["address"] == "") || ($_REQUEST["email"] == "") || ($_REQUEST["gander"] == "")) {
@@ -19,7 +19,6 @@
             $arr = explode('/', $_FILES['profile_image']['type']);
             $ext = $arr[1];
             $img_name = $username . '.' . $ext;
-            print_r($img_name);
             $temp_path = $_FILES["profile_image"]["tmp_name"];
             $target = 'images/' . $img_name;
             if (move_uploaded_file($temp_path, $target)) {
@@ -39,7 +38,7 @@
                 if (mysqli_query($conn, $sql)) {
                     $em = "Account is created successfully.";
                     $css_class = "alert-success";
-                    header("Location: /hms/login.php");
+                    header("Location: ./login.php");
                 }
                 else {
                     $em = "Sorry! An error occured!";
@@ -106,11 +105,11 @@
                         <option value="AB-">AB-</option>
                     </select> -->
                     <select class="form-select" name="gander" aria-label="Default select example">
-                        <option selected>Gander...</option>
+                        <option selected>Gender...</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
-                    <input type="file" name="profile_image" id="profile_image">
+                    <input type="file" class="form-control" name="profile_image" id="profile_image">
                     </div>
                 </div>    
                 <input type="submit" class ="submit" name="submit" value="Submit">
