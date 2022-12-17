@@ -38,8 +38,8 @@
                     </div>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="../php/logout.php">Logout</a></li>
-                        <li><a class="dropdown-item" href="../php/logout.php">Action</a></li>
+                        <li><a class="dropdown-item" href="../utility/logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="../utility/logout.php">Action</a></li>
                     </ul>
                 </div>
                 

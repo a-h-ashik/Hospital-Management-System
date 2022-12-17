@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sidebar */
+.container-mod {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+  }
+
+.sidebar {
+    color: white;
+    background-color: #17203f;
+    min-height: 50vh;
+    width: 15vw;
+    padding: 1rem;
+}
+
+.bar_tittle {
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.bar_menu {
+    width: 100%;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.bar_menu > a {
+    color: #7e8395;
+    text-decoration: none;
+    min-width: 100%;
+}
+
+.bar_menu .item {
+    min-width: 100%;
+    margin: 0.rem 0;
+    padding: 0.2rem 0;
+    transition: background 0.3s;
+}
+
+.bar_menu .item:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* Content */
+.content {
+    background-color: #f9faff;
+    width: 85vw;
+    min-height: 100vh;
+    padding: 0 1rem;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding-top: 0.25rem;
+}
+
+.user {
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(210, 210, 210);
+    border-radius: 15px;
+}
+
+.avater {
+    width: 2rem;
+    margin-left: 2px;
+}
+
+.header > .dropdown > .btn {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+} 
+
+ul.dropdown-menu.show {
+    transform: translate(0, 34px)!important;
+    margin-top: 0.5rem!important;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.btn-check:focus+.btn, .btn:focus {
+    box-shadow: 0!important;
+}
+
+
+/* Body */
+.body {
+    min-height: calc(100vh - 36px);
+}
+
+.body > .body-tittle {
+    padding-top: 1rem;
+}
+
+.body .welcome_text {
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.body .text {
+    color: #606060;
+}
+
+.body-content {
+    min-height: calc(100vh - 126.4px);
+}
+
+
+
+
+div img.center {
+    margin:0 auto;
+}
+
+

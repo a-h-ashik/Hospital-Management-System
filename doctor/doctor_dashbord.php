@@ -11,7 +11,7 @@
         <a href="./doctor_profile.php"><div class="mycard">
             <span>MANAGE <br> PROFILE</span>
         </div></a>
-        <a href="./appoinment.php"><div class="mycard">
+        <a href="./appointment.php"><div class="mycard">
             <span>TODAY's <br> APPOINMENTS</span>
         </div></a>
     </div>

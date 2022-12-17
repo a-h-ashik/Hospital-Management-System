@@ -76,7 +76,7 @@
                     <div class="name"><?php echo $row["doc_name"] ?> (<?php echo $row["degree"] ?>)</div>
                     <div class="speciality"><?php echo $row["speciality"] ?></div>
                     <div class="departmant">Department: <?php echo $row["dep_name"] ?></div>
-                    <a href=""><div class="botton">Set up an appoinment</div></a>
+                    <a href="./patient/Appointments.php?doc_id=<?php echo $row['doc_id'] ?>"><div class="botton">Set up an appoinment</div></a>
                 </div>
                 
             </div>

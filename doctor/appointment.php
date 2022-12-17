@@ -1,13 +1,13 @@
 <?php
     include "./doctor_template.php";
     include "../utility/date_time.php";
-    $sql = "SELECT * FROM appoinments A, patients P WHERE A.pat_id=P.pat_id AND date='$current_date'";
+    $sql = "SELECT * FROM appointments A, patients P WHERE A.pat_id=P.pat_id AND date='$current_date'";
     $result1 = mysqli_query($conn, $sql);
     $result2 = mysqli_query($conn, $sql);
 ?>
 
 <head>
-    <link rel="stylesheet" href="../css/doctor/appoinment.css">
+    <link rel="stylesheet" href="../css/doctor/appointment.css">
 </head>
 
     <div class="outer-container">
