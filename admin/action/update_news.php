@@ -1,5 +1,5 @@
 <?php
-    include '../../utility/admin_template.php';
+    include './admin_template_2.php';
     if (isset($_GET["news_name"])) {
         $prev_name = $_GET["news_name"];
         $sql = "SELECT * FROM news WHERE new_name='$prev_name'";
@@ -48,8 +48,8 @@
 
 ?>
 <head>
-    <link rel="stylesheet" href="../../css/admin.css">
-    <link rel="stylesheet" href="../../css/update.css">
+    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <link rel="stylesheet" href="../../css/admin/update.css">
 </head>
 <body>
     <div class="popup">

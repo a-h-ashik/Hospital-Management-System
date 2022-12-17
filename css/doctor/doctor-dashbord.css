@@ -1,0 +1,42 @@
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.outer-container {
+    width: 100%;
+    height: calc(100vh - 32px);
+}
+
+.inner-container {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.mycard {
+    margin: 2rem;
+    width: 10rem;
+    height: 10rem;
+    color: #4400ffab;
+    background-color: rgb(212, 212, 212);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 2px 20px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.mycard span {
+    text-align: center;
+}
+.mod {
+    align-items: flex-start;
+}
+
+.mod2 {
+    background-color: rgba(212, 212, 212, 0);
+    box-shadow: none;
+}

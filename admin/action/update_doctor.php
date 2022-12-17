@@ -1,5 +1,5 @@
 <?php
-    include '../../utility/admin_template.php';
+    include './admin_template_2.php';
     if (isset($_GET["user_id"]) && isset($_GET["type"])) {
         $id = $_GET["user_id"];
         $type = $_GET["type"];
@@ -19,10 +19,9 @@
         $degree = $_REQUEST["degree"];
         $visit = $_REQUEST["visit"];
         $department = $_REQUEST["department"];
-        $admin_id = $_SESSION['user_id'];
 
         #Update Query
-        $sql = "UPDATE doctors SET doc_name='$name', doc_email='$email', speciality='$speciality', degree='$degree', visit='$visit', adm_id='$admin_id', dep_name='$department' WHERE doc_id='$id'";
+        $sql = "UPDATE doctors SET doc_name='$name', doc_email='$email', speciality='$speciality', degree='$degree', visit='$visit', dep_name='$department' WHERE doc_id='$id'";
         $result = mysqli_query($conn, $sql);
 
         #Sending Messages
@@ -37,8 +36,8 @@
 
 ?>
 <head>
-    <link rel="stylesheet" href="../../css/admin.css">
-    <link rel="stylesheet" href="../../css/update.css">
+    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <link rel="stylesheet" href="../../css/admin/update.css">
 </head>
 <body>
     <div class="popup">

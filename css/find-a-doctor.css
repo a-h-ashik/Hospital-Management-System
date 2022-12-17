@@ -85,8 +85,14 @@ label {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.image {
+    display: flex;
+}
+
 img {
     width: 10rem;
+    border-radius: 50%;
+    height: 10rem;
 }
 
 .info {

@@ -70,7 +70,7 @@
 
             <div class="doctor-card">
                 <div class="image">
-                    <img src="./images/default.png">
+                    <img src="./images/doctor/<?php echo $row['doc_image'] ?>">
                 </div>
                 <div class="info">
                     <div class="name"><?php echo $row["doc_name"] ?> (<?php echo $row["degree"] ?>)</div>

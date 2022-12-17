@@ -1,5 +1,5 @@
 <?php
-    include '../../utility/admin_template.php';
+    include './admin_template_2.php';
     if (isset($_GET["story_name"])) {
         $prev_name = $_GET["story_name"];
         $sql = "SELECT * FROM stories WHERE sto_name='$prev_name'";
@@ -15,7 +15,7 @@
         if (($_REQUEST["name"] == "") || ($_REQUEST["details"] == "")) {
             $em = "Story isn't updated. You did not fill out all the fields.";
             $css_class = "alert-danger";
-            header("Location: admin_to_story.php?em=" . $em . "&css_class=" . $css_class);
+            header("Location: ../admin_to_story.php?em=" . $em . "&css_class=" . $css_class);
         }
         else {
             
@@ -48,8 +48,8 @@
 
 ?>
 <head>
-    <link rel="stylesheet" href="../../css/update.css">
-    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/admin/update.css">
+    <link rel="stylesheet" href="../../css/admin/admin.css">
 
 </head>
 <body>

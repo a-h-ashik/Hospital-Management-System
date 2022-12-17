@@ -16,11 +16,12 @@
             $address = $_REQUEST["address"];
             $email = $_REQUEST["email"];
             $gander = $_REQUEST["gander"];
+            $age = (int)$_REQUEST["age"];
             $arr = explode('/', $_FILES['profile_image']['type']);
             $ext = $arr[1];
             $img_name = $username . '.' . $ext;
             $temp_path = $_FILES["profile_image"]["tmp_name"];
-            $target = 'images/' . $img_name;
+            $target = './images/patient/' . $img_name;
             if (move_uploaded_file($temp_path, $target)) {
                 $sql = "SELECT pat_id FROM patients ORDER BY pat_id DESC LIMIT 1";
                 $result = mysqli_query($conn, $sql);
@@ -34,7 +35,7 @@
                 }
 
 
-                $sql = "INSERT INTO patients VALUES ($id, '$username', '$email', '$gander', '$address', '$img_name', '$password')";
+                $sql = "INSERT INTO patients VALUES ($id, '$username', '$email', '$gander', '$address', '$img_name', '$password', '$age')";
                 if (mysqli_query($conn, $sql)) {
                     $em = "Account is created successfully.";
                     $css_class = "alert-success";
@@ -104,6 +105,7 @@
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
                     </select> -->
+                    <input class="form-control" type="text" placeholder = "Age" aria-label="Address" name="age">
                     <select class="form-select" name="gander" aria-label="Default select example">
                         <option selected>Gender...</option>
                         <option value="Male">Male</option>

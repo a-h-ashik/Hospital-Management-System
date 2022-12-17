@@ -16,7 +16,7 @@
         else {
             $usertable = $_REQUEST["radio"] . "s";
             $useremail = $_REQUEST["email"];
-            $password = (int)$_REQUEST["password"];
+            $password = $_REQUEST["password"];
 
             if ($_REQUEST["radio"] == "patient") {
                 $email = 'pat_email';
@@ -35,30 +35,32 @@
                 $userid = 'adm_id';
             }
 
-
-            $sql = "SELECT $password FROM $usertable WHERE $email = '$useremail' AND EXISTS (SELECT * FROM $usertable WHERE $email = '$useremail')";
+            $sql = "SELECT * From $usertable WHERE pass = '$password' AND $email IN (SELECT $email FROM $usertable WHERE $email='$useremail')";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
             $count = mysqli_num_rows($result); 
-
-            #Setting Session
-            
-            $sql = "SELECT * FROM $usertable WHERE $email = '$useremail'";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             
             session_start();
-            $_SESSION["user_id"] = $row["$userid"];
-            $_SESSION["user_table"] = $usertable;
-
             if ($count == 1 && $usertable == "patients") {
+                #Setting Session
+                $_SESSION["user_id"] = $row["$userid"];
+                $_SESSION["is_patient"] = TRUE;
                 header("Location: ./index.php");
             }
             else if ($count == 1 && $usertable == "admins") {
+                #Setting Session
+                $_SESSION["user_id"] = $row["$userid"];
+                $_SESSION["is_admin"] = TRUE;
                 header("Location:./admin/admin.php");
             }
+            else if ($count == 1 && $usertable == "doctors") {
+                #Setting Session
+                $_SESSION["user_id"] = $row["$userid"];
+                $_SESSION["is_doctor"] = TRUE;
+                header("Location:./doctor/doctor_dashbord.php");
+            }
             else {
-                $em = "Account does not exist!";
+                $em = "Username or Password is invalid!";
                 $css_class = "alert-danger";
             }
         }
@@ -107,7 +109,7 @@
                 <input class="form-control" type="password" placeholder = "Password" aria-label="Password" name="password">
                 <input type="submit" class ="submit" name="submit" value="Submit">
                 </form>
-                <p class="question">Don't have an account? <a href="/hms/patient_signup.php">Signup</a></p>
+                <p class="question">Don't have an account? <a href="./patient_signup.php">Signup</a></p>
             </div>
         </div>
     </div>

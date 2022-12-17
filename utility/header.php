@@ -45,12 +45,12 @@
                 <a href="find-a-doctor.php"><div class="page">Find A Doctor</div></a>
 
                 <?php if (!$session_set) { ?>
-                <a href="login.php"><div class="page">Login</div></a>
+                <a href="./login.php"><div class="page">Login</div></a>
                 <?php } ?>
 
                 <?php if ($session_set) { ?>
                 <a href="#"><div class="page">Profile</div></a>
-                <a href="./php/logout.php"><div class="page">Logout</div></a> 
+                <a href="./utility/logout.php"><div class="page">Logout</div></a> 
                 <?php } ?>
             </div>
         </div>

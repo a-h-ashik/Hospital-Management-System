@@ -1,0 +1,95 @@
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.outer-container {
+    width: 100%;
+    height: calc(100vh - 36px);
+    padding: 1rem;
+    display: flex;
+}
+
+.box {
+    width: 50%;
+}
+
+/* LEFT BOX */
+.left, .right {
+    padding: 0 1rem;
+}
+
+.image {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+.inp {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 0.8rem;
+}
+
+/* RIGHT BOX */
+/* Table */
+.table-name {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+tr th {
+    border-bottom: 1px solid black;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.cng-pass, .up-img {
+    padding: 0.5rem;
+    background-color: aquamarine;
+}
+a{
+    width: 48%;
+    color: rgb(18, 18, 18);
+    text-decoration: none;
+    text-align: center;
+}
+
+
+.save-btn {
+    width: 100%;
+    color: black;
+    background-color: #5cfb44;
+    border-radius: 0;
+    border: none;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    /* transform: translateX(108%); */
+}
