@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.outer-container {
+    margin: 0 1rem;
+    min-height: 100vh;
+}
+
+.hospital {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+.hospital .name {
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.hospital .address, .hospital .contact {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+
+.info {
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+form {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.area {
+    width: 100%;
+    height: 15rem;
+    padding: 0.5rem;
+}
+
+.signature {
+    width: fit-content;
+    margin-top: 4rem;
+    border-top: 1px solid black;
+    padding: 0.2rem 4rem;
+    text-align: center;
+}

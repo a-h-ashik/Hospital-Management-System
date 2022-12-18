@@ -21,18 +21,16 @@
                         <th>Age</th>
                         <th>Gender</th>
                         <th>Date</th>
-                        <th>Completed</th>
                     </tr>
                     <?php
                         while($row = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
                             if ($row['shift'] == "M") {
                     ?>
                     <tr>
-                        <td><a href="#"><?php echo $row['pat_name'] ?></a></td>
+                        <td><a href="./prescription.php?pat_id=<?php echo $row['pat_id'] ?>"><?php echo $row['pat_name'] ?></a></td>
                         <td><?php echo $row['age'] ?></td>
                         <td><?php echo $row['gender'] ?></td>
                         <td><?php echo $row['date'] ?></td>
-                        <td>A</td>
                     </tr> 
                     <?php }} ?>
                 </table>    
@@ -46,7 +44,6 @@
                         <th>Age</th>
                         <th>Gender</th>
                         <th>Date</th>
-                        <th>Completed</th>
                     </tr>
                     
                     <?php
@@ -54,11 +51,10 @@
                             if ($row['shift'] == "E") {
                     ?>
                     <tr>
-                        <td><a href="#"><?php echo $row['pat_name'] ?></a></td>
+                        <td><a href="./prescription.php?pat_id=<?php echo $row['pat_id'] ?>"><?php echo $row['pat_name'] ?></a></td>
                         <td><?php echo $row['age'] ?></td>
                         <td><?php echo $row['gender'] ?></td>
                         <td><?php echo $row['date'] ?></td>
-                        <td>A</td>
                     </tr> 
                     <?php }} ?>
                 </table>

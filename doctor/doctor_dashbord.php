@@ -15,10 +15,4 @@
             <span>TODAY's <br> APPOINMENTS</span>
         </div></a>
     </div>
-    <div class="inner-container mod">
-        <a href=""><div class="mycard">
-            <span>PRESCRIPTIONS</span>
-        </div></a><a href=""><div class="mycard mod2">
-        </div></a>
-    </div>
 </div>
