@@ -22,7 +22,11 @@
             $img_name = $username . '.' . $ext;
             $temp_path = $_FILES["profile_image"]["tmp_name"];
             $target = './images/patient/' . $img_name;
+
+            #Creating Patient Account
             if (move_uploaded_file($temp_path, $target)) {
+
+                #Query For Finding Last Patient Id
                 $sql = "SELECT pat_id FROM patients ORDER BY pat_id DESC LIMIT 1";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
@@ -34,9 +38,27 @@
                     $id = "20220000";
                 }
 
-
+                #Query For Creating New Patient
                 $sql = "INSERT INTO patients VALUES ($id, '$username', '$email', '$gander', '$address', '$img_name', '$password', '$age')";
                 if (mysqli_query($conn, $sql)) {
+
+                    #Creating Patient Account
+                    #Query For Finding Last Patient Id
+                    $sql = "SELECT acc_id FROM accounts ORDER BY acc_id DESC LIMIT 1";
+                    $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                        $acc_id = (int)$row["acc_id"];
+                        $acc_id = $acc_id + 1;
+                    }
+                    else {
+                        $acc_id = "110000";
+                    }
+
+                    #Query For Creating New Patient's Account
+                    $sql = "INSERT INTO accounts VALUES ('$acc_id', 0, '$id')";
+                    $result = mysqli_query($conn, $sql);
+
                     $em = "Account is created successfully.";
                     $css_class = "alert-success";
                     header("Location: ./login.php");

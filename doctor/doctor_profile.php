@@ -2,7 +2,7 @@
     include "doctor_template.php";
 
     $doc_id =  $_SESSION['user_id'];
-    $sql = "SELECT * FROM doctors D, schedules S WHERE D.doc_id=S.doc_id AND D.doc_id='$doc_id'";
+    $sql = "SELECT * FROM doctors D, schedules S WHERE D.doc_id=S.doc_id AND D.doc_id='$doc_id' ORDER BY S.sl";
     $result = mysqli_query($conn, $sql);
     $result2 = mysqli_query($conn, $sql);
     

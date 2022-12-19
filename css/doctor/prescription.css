@@ -48,8 +48,19 @@ form {
 
 .signature {
     width: fit-content;
+    display: inline-block;
     margin-top: 4rem;
     border-top: 1px solid black;
     padding: 0.2rem 4rem;
     text-align: center;
+}
+
+.form-mod {
+    width: fit-content;
+    display: inline-block;
+    margin: 0 2rem;
+}
+
+.my-button {
+    padding: 0.5rem;
 }

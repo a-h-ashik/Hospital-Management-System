@@ -1,7 +1,15 @@
 
 <?php
     require "../utility/db_connection.php";
-    
+    if (isset($_GET['room_id'])) {
+        $room_id = $_GET['room_id'];
+    }
+    if (isset($_REQUEST['submit'])) {
+        $pat_id = $_REQUEST['id'];
+        $sql = "UPDATE rooms SET pat_id='$pat_id' WHERE room_id='$room_id'";
+        $result = mysqli_query($conn, $sql);
+    }
+
 
     
 ?>
@@ -90,10 +98,10 @@
         <div class="row">
             <div class="card col-8">
                 <div>
-                    <form action="/action_page.php">
+                    <form action="" method='post'>
                         <label for="fname">Patient Id</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Enter Patient Id">
-                        <input type="submit" value="Submit">
+                        <input type="text" placeholder="Enter Patient Id" name="id">
+                        <input type="submit" name="submit" value="Submit">
                     </form>
                 </div>
             </div>
@@ -103,7 +111,3 @@
 
 </body>
 </html>
-
-<?php
-    include "../utility/footer.php";
-?>

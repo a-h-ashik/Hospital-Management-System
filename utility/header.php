@@ -48,8 +48,10 @@
                 <a href="./login.php"><div class="page">Login</div></a>
                 <?php } ?>
 
-                <?php if ($session_set) { ?>
+                <?php if (isset($_SESSION['is_patient']) && $_SESSION['is_patient'] == TRUE) { ?>
                 <a href="./patient/ProfilePage.php"><div class="page">Profile</div></a>
+                <?php } ?>
+                <?php if ($session_set) { ?>
                 <a href="./utility/logout.php"><div class="page">Logout</div></a> 
                 <?php } ?>
             </div>

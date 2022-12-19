@@ -26,9 +26,9 @@
                 $email = 'doc_email';
                 $userid = 'doc_id';
             }
-            else if ($_REQUEST["radio"] == "labtech") {
-                $email = 'lat_email';
-                $userid = 'lat_id';
+            else if ($_REQUEST["radio"] == "accountant") {
+                $email = 'acc_email';
+                $userid = 'acc_id';
             }
             else if ($_REQUEST["radio"] == "admin") {
                 $email = 'adm_email';
@@ -41,6 +41,12 @@
             $count = mysqli_num_rows($result); 
             
             session_start();
+            $_SESSION["is_patient"] = FALSE;
+            $_SESSION["is_admin"] = FALSE;
+            $_SESSION["is_doctor"] = FALSE;
+            $_SESSION["is_accountant"] = FALSE;
+
+
             if ($count == 1 && $usertable == "patients") {
                 #Setting Session
                 $_SESSION["user_id"] = $row["$userid"];
@@ -58,6 +64,12 @@
                 $_SESSION["user_id"] = $row["$userid"];
                 $_SESSION["is_doctor"] = TRUE;
                 header("Location:./doctor/doctor_dashbord.php");
+            }
+            else if ($count == 1 && $usertable == "accountants") {
+                #Setting Session
+                $_SESSION["user_id"] = $row["$userid"];
+                $_SESSION["is_accountant"] = TRUE;
+                header("Location:./accountant/accountant_template.php");
             }
             else {
                 $em = "Username or Password is invalid!";
@@ -100,8 +112,8 @@
                     <label class="input__label" for="r1">Patient</label>
                     <input class="input__radio" type="radio" value="doctor" name="radio" id="r2">
                     <label class="input__label" for="r2">Doctor</label>
-                    <input class="input__radio" type="radio" value="labtech" name="radio" id="r3">
-                    <label class="input__label" for="r3">Lab Tech</label>
+                    <input class="input__radio" type="radio" value="accountant" name="radio" id="r3">
+                    <label class="input__label" for="r3">Accountant</label>
                     <input class="input__radio" type="radio" value="admin" name="radio" id="r4">
                     <label class="input__label" for="r4">Admin</label>
                 </div>

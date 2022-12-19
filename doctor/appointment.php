@@ -1,7 +1,8 @@
 <?php
     include "./doctor_template.php";
     include "../utility/date_time.php";
-    $sql = "SELECT * FROM appointments A, patients P WHERE A.pat_id=P.pat_id AND date='$current_date'";
+    $doc_id = $_SESSION['user_id'];
+    $sql = "SELECT * FROM appointments A, patients P, doctors D WHERE A.pat_id=P.pat_id AND A.doc_id=D.doc_id AND date='$current_date' AND A.doc_id='$doc_id'";
     $result1 = mysqli_query($conn, $sql);
     $result2 = mysqli_query($conn, $sql);
 ?>

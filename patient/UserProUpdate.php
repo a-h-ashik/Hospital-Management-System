@@ -9,7 +9,6 @@ if (isset($_POST['update'])){
     include("../utility/db_connection.php");
 
     $UserUpdatedName = $_POST['updateUserName'];
-    $UserUpdatedEmail = $_POST['updateUserEmail'];
     $UserUpdatedAddress = $_POST['updateUseraddress'];
     $UserUpdatedPassword = $_POST['UserPassword'];
     $UserUpdatedImage = $_FILES['updateImage'];
@@ -17,7 +16,7 @@ if (isset($_POST['update'])){
 
 
 
-    if (!empty($UserUpdatedName) && !empty($UserUpdatedEmail) && !empty($UserUpdatedAddress) && !empty($UserUpdatedPassword) && !empty($UserUpdatedAge)){
+    if (!empty($UserUpdatedName) && !empty($UserUpdatedAddress) && !empty($UserUpdatedPassword) && !empty($UserUpdatedAge)){
 
         // var_dump($UserUpdatedImage); Using Vardump for checking values
         
@@ -47,7 +46,7 @@ if (isset($_POST['update'])){
 
                     $id = $_SESSION["user_id"];
 
-                    $sql = "UPDATE patients SET pat_name='$UserUpdatedName', pat_email='$UserUpdatedEmail',  address ='$UserUpdatedAddress',  pass='$UserUpdatedPassword', pat_image='$imageName',age='$UserUpdatedAge' WHERE pat_id = '$id'";
+                    $sql = "UPDATE patients SET pat_name='$UserUpdatedName',  address ='$UserUpdatedAddress',  pass='$UserUpdatedPassword', pat_image='$imageName',age='$UserUpdatedAge' WHERE pat_id = '$id'";
                     $Results=mysqli_query($conn, $sql);
 
                     header('Location: ./ProfilePage.php?Successful=UserProfileUpdated');

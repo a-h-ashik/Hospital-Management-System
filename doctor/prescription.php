@@ -7,9 +7,35 @@
         $pat_id = $_GET['pat_id'];
         $doc_id = $_SESSION['user_id'];
     }
+
+    #Query For Extracting Information From 3 Tables
     $sql = "SELECT * FROM doctors D, patients P, appointments A WHERE D.doc_id=A.doc_id AND A.pat_id=P.pat_id AND A.date='$current_date' AND A.pat_id='$pat_id'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+    if (isset($_REQUEST['pay'])) {
+        #Query For Checking Weather Bill Added Or Not
+        $sql = "SELECT is_completed FROM appointments AS A WHERE A.date='$current_date' AND A.pat_id='$pat_id' AND A.doc_id='$doc_id'";
+        $result = mysqli_query($conn, $sql);
+        $row2 = mysqli_fetch_array($result);
+        if (!$row2['is_completed']) {
+
+        #Query For Finding Last Bill Ammount
+        $sql = "SELECT * FROM accounts A, patients P WHERE A.pat_id=P.pat_id AND A.pat_id='$pat_id'";
+        $result = mysqli_query($conn, $sql);
+        $row1 = mysqli_fetch_array($result);
+        $current_bill = (int)$row1['bill'];
+        $new_bill = $current_bill + (int)$row['visit'];
+        
+        #Query For Updating Bill
+        $sql = "UPDATE accounts SET bill='$new_bill'  WHERE pat_id='$pat_id'";
+        $result = mysqli_query($conn, $sql);
+
+        #Query For Update Completed Status In Appointments Table
+        $sql = "UPDATE appointments AS A SET is_completed=TRUE WHERE A.date='$current_date' AND A.pat_id='$pat_id' AND A.doc_id='$doc_id'";
+        $result = mysqli_query($conn, $sql);
+        }
+    }
 ?>
 
 
@@ -42,6 +68,9 @@
         <?php echo $row['doc_name'] ?> <br>
             <small><?php echo $row['degree'] ?></small>
         </div>
+        <form class="form-mod" action="" method="post">
+            <input type="submit" class="my-button" name="pay" value="Prescribed">
+        </form>
     </div>
 </body>
 </html>

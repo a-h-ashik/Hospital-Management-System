@@ -20,8 +20,10 @@
                     <a class="a" href="admin.php"><p class="item">Dashbord</p></a>
                     <a href="admin_to_patient.php"><p class="item">Patient</p></a>
                     <a href="admin_to_doctor.php"><p class="item">Doctor</p></a>
+                    <a href="admin_to_accountant.php"><p class="item">Accountant</p></a>
                     <a href="admin_to_story.php"><p class="item">Story</p></a>
                     <a href="admin_to_news.php"><p class="item">News</p></a>
+                    <a href="admin_to_schedule.php"><p class="item">Schedule</p></a>
                 </div>
         </div>
 

@@ -1,6 +1,5 @@
 <?php
     include '../utility/admin_template.php';
-
     
     #Getting for Messages
     if (isset($_GET["em"]) && isset($_GET["css_class"])) {
@@ -10,53 +9,55 @@
 
     #Search Functionality
     if (!isset($_REQUEST["search"])) {
-        $sql = "SELECT * FROM news";
-        $story = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM accountants";
+        $result = mysqli_query($conn, $sql);
     }
     else {
         $value = $_REQUEST["search_val"];
-        $sql = "SELECT * FROM news WHERE new_name LIKE '%$value%'";
-        $story = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM accountants WHERE acc_name LIKE '%$value%'";
+        $result = mysqli_query($conn, $sql);
     }
     
-    #Story Creation Functionality
+    #Doctor Creation Functionality
     if (isset($_REQUEST["submit"])) {
-        if (($_REQUEST["name"] == "") || ($_REQUEST["details"] == "")) {
+        if (($_REQUEST["name"] == "") || ($_REQUEST["password1"] == "") || ($_REQUEST["password2"] == "")) {
             $em = "Fill out all the fields!";
             $css_class = "alert-danger";
         }
+        else if ($_REQUEST["password1"] != $_REQUEST["password2"]) {
+            $em = "Passwords do not match!";
+            $css_class = "alert-danger";
+        }
         else {
+            #Setting doctor_id
+            $sql = "SELECT acc_id FROM accountants ORDER BY acc_id DESC LIMIT 1";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $id = (int)$row["acc_id"];
+                    $id = $id + 1;
+                }
+                else {
+                    $id = "55500";
+                }
             
             #Getting Values from FORM
             $name = $_REQUEST["name"];
-            $details = $_REQUEST["details"];
-            $date = date("Y-m-d");
-            $admin_id = (int)$_SESSION['user_id'];
+            $email = $_REQUEST["email"];
+            $password1 = $_REQUEST["password1"];
+            
+            #Insert Query
+            $sql = "INSERT INTO accountants VALUES ($id, '$name', '$email', '$password1')";
+            $result = mysqli_query($conn, $sql);
 
-            $arr = explode('/', $_FILES['story_image']['type']);
-            $ext = $arr[1];
-            $img_name = $name . '.' . $ext;
-
-            $temp_path = $_FILES["story_image"]["tmp_name"];
-            $target = '../images/' . $img_name;
-            if (move_uploaded_file($temp_path, $target)) {
-
-
-                $sql = "INSERT INTO news VALUES ('$name', '$details', '$img_name', '$admin_id', '$date')";
-                if (mysqli_query($conn, $sql)) {
-                    $em = "Account is created successfully.";
-                    $css_class = "alert-success";
-                    header("Location: ./admin_to_news.php");
-                }
-                else {
-                    $em = "Sorry! An error occured!";
-                    $css_class = "alert-danger";
-                }
-                
-                
+            #Sending Messages
+            if ($result) {
+                $em = "$name is added.";
+                $css_class = "alert-success";
+                header("Location: ./admin_to_accountant.php");
             }
             else {
-                $em = "Faild to upload the image!";
+                $em = "There is an error!";
                 $css_class = "alert-danger";
             }
         }
@@ -66,7 +67,7 @@
 
 
 <head>
-    <title>News-Admin || HMS</title>
+    <title>Doctor-Admin || HMS</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../css/admin/admin_to_patient.css">
     <link rel="stylesheet" href="../css/admin/admin_to_doctor.css">
@@ -74,7 +75,7 @@
 <body>
 
             <div class="top-bar">
-                <div class="top-bar-text">News</div>
+                <div class="top-bar-text">Accountants</div>
                 <div class="search_bar">
                     <form action="" method="post">
                         <input type="search" name="search_val">
@@ -90,23 +91,22 @@
             <table action="" method="post">
                 <thead>
                     <tr id="header">
+                    <th scope="col">ID</th>
                     <th scope="col">NAME</th>
-                    <th scope="col">DETAILS</th>
-                    <th scope="col">DATE</th>
+                    <th scope="col">EMAIL</th>
                     <th scope="col">ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_array($story, MYSQLI_ASSOC)) {?>
+                    <?php while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                        $id = $row["acc_id"];
+                    ?>
                     <tr>
-                    <td><?php echo $row["new_name"] ?></td>
-                    <td><?php echo $row["details"] ?></td>
-                    <td><?php echo $row["new_date"] ?></td>
-                    <td class="">
-                    <a href="./action/update_news.php?news_name=<?php echo $row["new_name"] ?>">
-                    <button class="button_update" name="update"><span class="material-symbols-outlined">edit</span></button>
-                    </a>
-                    <a href="./action/delete_news_story.php?type=news&name=<?php echo $row["new_name"] ?>" ><button class="button_delete" name="delete"><span class="material-symbols-outlined">delete_forever</span></button></a>                       
+                    <td><?php echo $row["acc_id"] ?></td>
+                    <td><?php echo $row["acc_name"] ?></td>
+                    <td><?php echo $row["acc_email"] ?></td>
+                    <td class="action">
+                    <a href="./action/delete_accountant.php?user_id=<?php echo $id ?>" ><button class="button_delete" name="delete"><span class="material-symbols-outlined">delete_forever</span></button></a>                       
                     </td>
                     </tr>
                     <?php } ?>
@@ -123,13 +123,13 @@
             
 
             <div class="popup">
-                
                 <div class="window">
                     <button class="close"><span class="material-symbols-outlined">disabled_by_default</span></button>
-                    <form class="add_form" action="" method="post" enctype="multipart/form-data">
+                    <form class="add_form" action="" method="post">
                     <input class="form-control" type="text" placeholder = "Name" aria-label="Name" name="name">
-                    <textarea name="details" class="form-control" rows="10" placeholder="Details..."></textarea>
-                    <input class="form-control" type="file" name="story_image">
+                    <input class="form-control" type="text" placeholder = "Email" aria-label="Email" name="email">
+                    <input class="form-control" type="password" placeholder = "Password" aria-label="Password1" name="password1">
+                    <input class="form-control" type="password" placeholder = "Re-enter Password" aria-label="Password2" name="password2">
                     <input type="submit" class ="submit" name="submit" value="Submit">
                     </form>
                 </div>

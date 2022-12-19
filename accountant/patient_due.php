@@ -12,8 +12,7 @@
         
 
     }
-
-    
+   
 ?>
 
 
@@ -98,6 +97,23 @@
         justify-content: center;
         align-items: center;
     } 
+
+
+
+/* Patients Data Table  */
+    table {
+         border-collapse: collapse;
+         width: 100%;
+        }
+
+    th, td {
+         text-align: center;
+         padding: 8px;
+        }
+
+        tr:nth-child(even) {background-color: #f2f2f2;}
+
+
 </style>
 
 </head>
@@ -115,23 +131,34 @@
                 </form>
             </div>
             <?php if ($clicked) { ?>
-            <div class="info">
-                <p>Name: <?php echo $row['pat_name'] ?></p>
-                <p>Age: <?php echo $row['age'] ?></p>
-                <p>Ammount: <?php echo $row['bill'] ?></p>
+
+          
+            <div style="overflow-x: :auto;" >
+                 <table>
+                    <tr> 
+                        <th>Patient's Name</th>
+                        <th>Age</th>
+                        <th>Due Amount</th>
+                    </tr>
+
+                    <tr>
+                        <td><?php echo $row['pat_name'] ?></td>
+                        <td><?php echo $row['age'] ?></td>
+                        <td><?php echo $row['bill'] ?></td>
+    
+                    </tr>
+                </table>
             </div>
+
+                 
             <?php } ?>
-        </div>
+        </div>  
+         
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Font Awsome Kit -->
     <script src="https://kit.fontawesome.com/a481ba0e3b.js" crossorigin="anonymous"></script>
-
-</body>
-</html>
-
-
 
 
 <?php

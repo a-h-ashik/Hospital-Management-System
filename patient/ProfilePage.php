@@ -99,7 +99,7 @@ if (isset($_GET['Error'])) {
             
             <div class="form-group">
             E-mail: 
-                <input type="email" name="updateUserEmail" class="form-control" value="<?php echo $row['pat_email'] ?>">
+                <input type="email" name="updateUserEmail" class="form-control" value="<?php echo $row['pat_email'] ?>" disabled>
 
             </div>
            

@@ -1,6 +1,5 @@
 <!-- Header -->
 
-
 <?php
     require "../utility/db_connection.php";
 
@@ -42,7 +41,7 @@
     
     <div class="container-mod">
         <div class="sidebar">
-            <div class="bar_tittle">ACCOUNTANCES</div>
+            <div class="bar_tittle">ACCOUNTANT</div>
             <div class="bar_menu">                  
                 <a href="room_template.php"><p class="item">Room Booking</p></a>
                 <a href="patient_due.php"><p class="item">Patient Due</p></a>
@@ -50,8 +49,3 @@
         </div>
     </div>
 </body>
-
-
-<?php
-    include "../utility/footer.php";
-?>
