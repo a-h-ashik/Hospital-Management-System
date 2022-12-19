@@ -6,7 +6,7 @@
             $sql =  "SELECT sto_name FROM stories WHERE sto_name IN (SELECT sto_name FROM stories WHERE sto_name = '$sto_name')";
             $result_name = mysqli_query($conn, $sql);
 
-            $sql = "DELETE FROM stories WHERE sto_name='$name'";
+            $sql = "DELETE FROM stories WHERE sto_name='$sto_name'";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {
@@ -27,7 +27,7 @@
             $sql =  "SELECT new_name FROM news WHERE new_name IN (SELECT new_name FROM news WHERE new_name = '$new_name')";
             $result_name = mysqli_query($conn, $sql);
 
-            $sql = "DELETE FROM news WHERE new_name='$name'";
+            $sql = "DELETE FROM news WHERE new_name='$new_name'";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {

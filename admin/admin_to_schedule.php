@@ -159,10 +159,10 @@
                 <div class="window">
                     <button class="close"><span class="material-symbols-outlined">disabled_by_default</span></button>
                     <form class="add_form" action="" method="post">
-                    <input class="form-control" type="text" placeholder = "Id" aria-label="Id" name="id">
-                    <input class="form-control" type="text" placeholder = "Day" aria-label="Day" name="day">
-                    <input class="form-control" type="text" placeholder = "Morning Shift" aria-label="Morning Shift" name="shift_m">
-                    <input class="form-control" type="text" placeholder = "Evening Shift" aria-label="Evening Shift" name="shift_e">
+                    <input class="form-control" type="text" placeholder = "Doctor's ID" aria-label="Id" name="id">
+                    <input class="form-control" type="text" placeholder = "Day (Ex. Sat/Sun/Mon)" aria-label="Day" name="day">
+                    <input class="form-control" type="text" placeholder = "Morning Shift (TRUE/FALSE)" aria-label="Morning Shift" name="shift_m">
+                    <input class="form-control" type="text" placeholder = "Evening Shift (TRUE/FALSE)" aria-label="Evening Shift" name="shift_e">
                     <input type="submit" class ="submit" name="submit" value="Submit">
                     </form>
                 </div>
